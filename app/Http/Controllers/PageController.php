@@ -9,7 +9,7 @@ use App\Http\Controllers\ErrorController;
 class PageController extends Controller
 {
     public function welcomePage() {
-        return view('layouts.welcome');
+        return view('pages.welcome');
     }
 
     public function errorPage() {
