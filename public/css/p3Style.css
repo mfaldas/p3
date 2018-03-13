@@ -1,0 +1,72 @@
+/**
+ * p3Style.css
+ * CSS style sheet for the display file.
+ *
+ * Created and Modified by: Marc-Eli Faldas
+ * Last Modified: 2/20/2018
+ */
+
+body {
+    background-image: url("/images/_KatyPerry.jpg");
+}
+
+.parent {
+
+    width: 750px;
+    height: 620px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 10px outset rgba(0, 0, 0, 0.05);
+    border-radius: 25px;
+    padding: 40px;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.parent img {
+
+    max-height: 30%;
+    display: block;
+    margin: auto;
+}
+
+.parent h1 {
+
+    text-align: center;
+    letter-spacing: 2px;
+    font-family: cursive;
+    color: #ae274e;
+}
+
+.splitTextBox {
+    margin-left: 3px;
+    width: 250px;
+}
+
+.billTextBox {
+    width: 250px;
+}
+
+.tipDropdown {
+    margin-left: 14px;
+}
+
+.splitButton {
+
+    background-color: #ae274e;
+    border: 2px solid #ae274e;
+    color: white;
+    padding: 10px;
+    border-radius: 5em / 5em;
+    display: block;
+    margin: auto;
+}
+
+.standard {
+
+    text-align: justify;
+    padding-right: 35px;
+}

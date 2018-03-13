@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\CalculateController;
+use App\Http\Controllers\ErrorController;
 
 class PageController extends Controller
 {
     public function welcomePage() {
-        return 'This will be the welcome page for The Bill Splitter.';
+        return view('layouts.welcome');
     }
 
     public function errorPage() {
-        return 'There is an error with the calculation.  Will show the error.';
+        $e = new ErrorController();
+        return $e->error();
     }
 
     public function calculatedPage() {
