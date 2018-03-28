@@ -83,7 +83,7 @@
 </div>
 
 <footer>
-    <a href='http://github.com/susanBuck/foobooks'><i class='fa fa-github'></i> View on Github</a>
+    <a href='https://github.com/mfaldas/p3'><i class='fa fa-github'></i> View on Github</a>
 </footer>
 
 </body>
