@@ -2,8 +2,13 @@
 
 @section('result')
 
-    <div class="alert alert-success">
-        Calculation Success.
-    </div>
+    @if(count($errors) == 0)
+        <div class="alert alert-success">
+           {{ $printResults }}
+        </div>
+
+    @else
+        @include('modules.error-form')
+    @endif
 
 @endsection
