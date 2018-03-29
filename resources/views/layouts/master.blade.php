@@ -18,66 +18,66 @@
 
     <br>
 
-    <form method='GET' action='/show'>
+    @section('input')
 
-        <div class="row">
+            <div class="row">
 
-            <div class="col-sm-6">
-                <label>*Split:
+                <div class="col-sm-6">
+                    <label>*Split:
 
-                    <input type="text"
-                           name="split"
-                           class="splitTextBox"
-                           value="{{ old('split') }}"
-                           placeholder="4"
-                           required>
-                    @include('modules.error-field', ['field' => 'split'])
-                </label>
+                        <input type="text"
+                               name="split"
+                               class="splitTextBox"
+                               value="{{ $split }}"
+                               placeholder="4"
+                               required>
+                        @include('modules.error-field', ['field' => 'split'])
+                    </label>
 
-                <br>
+                    <br>
 
-                <label>*Bill: $
-                    <input type="text"
-                           name="bill"
-                           class="billTextBox"
-                           value="{{ old('bill') }}"
-                           placeholder='62.51'
-                           required>
-                    @include('modules.error-field', ['field' => 'bill'])
-                </label>
+                    <label>*Bill: $
+                        <input type="text"
+                               name="bill"
+                               class="billTextBox"
+                               value="{{ $bill }}"
+                               placeholder='62.51'
+                               required>
+                        @include('modules.error-field', ['field' => 'bill'])
+                    </label>
 
-                <p>
-                    <small><em>*Required Inputs</em></small>
-                </p>
+                    <p>
+                        <small><em>*Required Inputs</em></small>
+                    </p>
 
+                </div>
+
+                <div class="col-sm-3">
+                    <label class="tipLabel">Tip:
+                        <select name="tip" class="tipDropdown">
+                            <option value="1" {{ $tip == '1' ? 'selected' : '' }}>No Tip</option>
+                            <option value="1.10" {{ $tip == '1.10' ? 'selected' : '' }}>10% Tip</option>
+                            <option value="1.15" {{ $tip == '1.15' ? 'selected' : '' }}>15% Tip</option>
+                            <option value="1.20" {{ $tip == '1.20' ? 'selected' : '' }}>20% Tip</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="col-sm-3">
+                    <label>Round Up:
+                        <input type="checkbox" name="roundUp" value="1"  {{ ($roundUp) ? 'checked' : '' }}>
+                    </label>
+                </div>
             </div>
 
-            <div class="col-sm-3">
-                <label class="tipLabel">Tip:
-                    <select name="tip" class="tipDropdown">
-                        <option value="1" {{ old('tip') == 1 ? 'selected' : '' }}>No Tip</option>
-                        <option value="1.10" {{ old('tip') == 1.10 ? 'selected' : '' }}>10% Tip</option>
-                        <option value="1.15" {{ old('tip') == 1.15 ? 'selected' : '' }}>15% Tip</option>
-                        <option value="1.20" {{ old('tip') == 1.20 ? 'selected' : '' }}>20% Tip</option>
-                    </select>
-                </label>
-            </div>
 
-            <div class="col-sm-3">
-                <label>Round Up:
-                    <input type="checkbox" name="roundUp" value="1" @if(old('roundUp')) checked @endif>
-                </label>
-            </div>
-        </div>
+            <input type="submit" value="Split It Girl!" class="splitButton" name="submit">
 
+    @show
 
-        <input type="submit" value="Split It Girl!" class="splitButton" name="submit">
-    </form>
+    <div class="standard">
+        @yield("result")
 
-    <br>
-
-
-    <div class="standard"> @yield("result")
     </div>
 
 </div>
