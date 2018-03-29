@@ -11,40 +11,27 @@ class PageController extends Controller
 
     public function calculation(Request $request)
     {
+        $dC = new DataController($request);
+
+        // Base Case if the User is Logging in for the first Time
+        // No Data form has been submitted yet
         if (!$request->has('bill')) {
-            return view('pages.calculation', [
-                'standard' => true,
-                'split' => null,
-                'bill' => null,
-                'tip' => '1',
-                'roundUp' => 0
-                ]);
+            return $dC->baseCaseData();
         }
-
-        //$request->session()->put('split', $request->input('split'));
-        //$request->session()->put('bill', $request->input('bill'));
-
-        $split = $request->get("split"); //How Many People to Split Amongst
-        $bill = $request->get("bill"); //Bill from User
-        $tip = $request->get("tip"); //How Much Tip
-        $roundUp = $request->has("roundUp");
 
         $validator = Validator::make($request->all(), [
             "bill" => ["required", new MoneyFormat],
             "split" => "integer|min:1|max:100|required",
         ]);
 
+        // If validation fails, present error messages and the
+        // the errors.
         if ($validator->fails()) {
-            return view('pages.calculation', [
-                'split' => $split,
-                'bill' => $bill,
-                'roundUp' => $roundUp,
-                'tip' => $tip
-                ])
-                ->withErrors($validator);
+            return $dC->validatorFailureData($validator);
         }
 
-        $splitter = new SplitterController($split, $bill, $tip, $roundUp);
+        $data = $dC->getDataParameters();
+        $splitter = new SplitterController($data[0], $data[1], $data[2], $data[3]);
 
         $billWithTip = $splitter->getBillWithTip();
         $calcS = $splitter->calculatedSplit($billWithTip);
@@ -54,32 +41,15 @@ class PageController extends Controller
         $splitBetween = $splitter->splitWays($billWithTip, $calcS);
 
         if ($calcS < 0.01) {
-            return view('pages.calculation', [
-                'standard' => false,
-                'calculable' => false,
-                'split' => $split,
-                'bill' => $bill,
-                'roundUp' => $roundUp,
-                'tip' => $tip,
-                'printResults' => null
-            ]);
+            return $dC->errordata();
         } else {
-            if ($roundUp == true) {
+            if ($data[3] == true) {
                 $splitBetween = $splitter->roundWhole($splitBetween);
             }
         }
 
         $printResults = $splitter->resultMaker($splitBetween);
 
-        return view('pages.calculation', [
-            'standard' => false,
-            'calculable' => true,
-            'split' => $split,
-            'bill' => $bill,
-            'roundUp' => $roundUp,
-            'tip' => $tip,
-            'printResults' => $printResults
-        ]);
+        return $dC->calculatedData($printResults);
     }
-
 }
