@@ -1,7 +1,7 @@
 <?php
 
-Route::get('/', 'PageController@calculation');
-
+Route::get('/', 'PageController@index');
+Route::get('/calculation', 'PageController@calculation');
 
 
 

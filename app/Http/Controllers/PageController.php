@@ -8,31 +8,52 @@ use Validator;
 
 class PageController extends Controller
 {
+    /*
+     * Showing Form
+     */
+    public function index(Request $request)
+    {
+        $results = $request->session()->get('results');
+        $calcError = $request->session()->get('calcError');
+        $bill = $request->session()->get('bill');
+        $split = $request->session()->get('split');
+        $tip = $request->session()->get('tip');
+        $roundUp = $request->session()->get('roundUp');
+
+        return view('pages.index')->with([
+            'results' => $results,
+            'calcError' => $calcError,
+            'split' => $split,
+            'bill' => $bill,
+            'tip' => $tip,
+            'roundUp' => $roundUp
+
+        ]);
+    }
+
+    /*
+     * Processing Form
+     */
 
     public function calculation(Request $request)
     {
-        $dC = new DataController($request);
-
-        // Base Case if the User is Logging in for the first Time
-        // No Data form has been submitted yet
-        if (!$request->has('bill')) {
-            return $dC->baseCaseData();
-        }
-
-        $validator = Validator::make($request->all(), [
-            "bill" => ["required", new MoneyFormat],
-            "split" => "integer|min:1|max:100|required",
+        //Validate the data
+        $this->validate($request, [
+            'bill' => ['required', new MoneyFormat],
+            'split' =>'integer|min:1|max:100|required',
         ]);
 
-        // If validation fails, present error messages and the
-        // the errors.
-        if ($validator->fails()) {
-            return $dC->validatorFailureData($validator);
-        }
+        //If the validation fails, the user automatically sent back to '/'
 
-        $data = $dC->getDataParameters();
-        $splitter = new SplitterController($data[0], $data[1], $data[2], $data[3]);
+        //Run the Calculation
+        $splitter = new SplitterController(
+            $request->split,
+            $request->bill,
+            $request->tip,
+            $request->roundUp
+        );
 
+        $calcError = false;
         $billWithTip = $splitter->getBillWithTip();
         $calcS = $splitter->calculatedSplit($billWithTip);
 
@@ -41,15 +62,25 @@ class PageController extends Controller
         $splitBetween = $splitter->splitWays($billWithTip, $calcS);
 
         if ($calcS < 0.01) {
-            return $dC->errordata();
+            $calcError = true;
         } else {
-            if ($data[3] == true) {
+            if ($request->roundUp == true) {
                 $splitBetween = $splitter->roundWhole($splitBetween);
             }
         }
 
-        $printResults = $splitter->resultMaker($splitBetween);
+        $results = $splitter->resultMaker($splitBetween);
 
-        return $dC->calculatedData($printResults);
+        $request->session()->put('bill', $request->bill);
+        $request->session()->put('split', $request->split);
+        $request->session()->put('tip', $request->tip);
+        $request->session()->put('roundUp', $request->roundUp);
+
+        // redirect back to the page and include the results
+        return redirect('/')->with([
+            'results' => $results,
+            'calcError' => $calcError,
+        ]);
     }
+
 }

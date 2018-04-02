@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset='UTF-8'>
     <title>Katy Perry's Bill Splitter</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' rel='stylesheet'>
     <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
     <link href='/css/p3Style.css' rel='stylesheet'>
 
@@ -11,74 +11,12 @@
 
 <body>
 
-<div class="parent">
+<div class='parent'>
 
-    <img src="/images/_KatyPerryLogo.png" alt="Katy Perry Logo" id="kpl">
+    <img src='/images/_KatyPerryLogo.png' alt='Katy Perry Logo' id='kpl'>
     <h1>Bill Splitter</h1>
 
-    <br>
-
-    @section('input')
-
-            <div class="row">
-
-                <div class="col-sm-6">
-                    <label>*Split:
-
-                        <input type="text"
-                               name="split"
-                               class="splitTextBox"
-                               value="{{ $split }}"
-                               placeholder="4"
-                               required>
-                        @include('modules.error-field', ['field' => 'split'])
-                    </label>
-
-                    <br>
-
-                    <label>*Bill: $
-                        <input type="text"
-                               name="bill"
-                               class="billTextBox"
-                               value="{{ $bill }}"
-                               placeholder='62.51'
-                               required>
-                        @include('modules.error-field', ['field' => 'bill'])
-                    </label>
-
-                    <p>
-                        <small><em>*Required Inputs</em></small>
-                    </p>
-
-                </div>
-
-                <div class="col-sm-3">
-                    <label class="tipLabel">Tip:
-                        <select name="tip" class="tipDropdown">
-                            <option value="1" {{ $tip == '1' ? 'selected' : '' }}>No Tip</option>
-                            <option value="1.10" {{ $tip == '1.10' ? 'selected' : '' }}>10% Tip</option>
-                            <option value="1.15" {{ $tip == '1.15' ? 'selected' : '' }}>15% Tip</option>
-                            <option value="1.20" {{ $tip == '1.20' ? 'selected' : '' }}>20% Tip</option>
-                        </select>
-                    </label>
-                </div>
-
-                <div class="col-sm-3">
-                    <label>Round Up:
-                        <input type="checkbox" name="roundUp" value="1"  {{ ($roundUp) ? 'checked' : '' }}>
-                    </label>
-                </div>
-            </div>
-
-
-            <input type="submit" value="Split It Girl!" class="splitButton" name="submit">
-
-    @show
-
-    <div class="standard">
-        @yield("result")
-
-    </div>
+    @yield('content')
 
 </div>
 
