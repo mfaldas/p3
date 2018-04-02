@@ -1,5 +1,9 @@
-@extends('layouts.master')
+{{-- Master Template --}}
+{{-- Integrated from Project 2 to Project 3. --}}
+{{-- Created By: Marc-Eli Faldas --}}
+{{-- Last Modified: 4/2/2018  --}}
 
+@extends('layouts.master')
 
 @section('content')
 

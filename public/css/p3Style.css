@@ -1,9 +1,13 @@
 /**
  * p3Style.css
- * CSS style sheet for the display file.
+ * CSS style Sheet for Project 3.
+ * Integrated from Project 2 to Project 3
+ * Added more code to include in-field error styles
+ * and margin/padding around elements to avoid the misuse of
+ * <br>.
  *
  * Created and Modified by: Marc-Eli Faldas
- * Last Modified: 2/20/2018
+ * Last Modified: 4/2/2018
  */
 
 body {

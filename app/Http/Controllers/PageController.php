@@ -37,6 +37,12 @@ class PageController extends Controller
 
     public function calculation(Request $request)
     {
+
+        $request->session()->put('bill', $request->bill);
+        $request->session()->put('split', $request->split);
+        $request->session()->put('tip', $request->tip);
+        $request->session()->put('roundUp', $request->roundUp);
+
         //Validate the data
         $this->validate($request, [
             'bill' => ['required', new MoneyFormat],

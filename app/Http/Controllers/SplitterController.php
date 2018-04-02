@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Splitter.php
+ * Splitter class that is used to calculate the payments, ensure the payments are valid,
+ * and create results that the user will understand.
+ * Integrated code from Project 2 to Project 3
+ * Created and Modified By: Marc-Eli Faldas
+ * Last Modified: 2/20/2018
+ */
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
