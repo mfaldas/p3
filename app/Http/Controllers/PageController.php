@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Rules\MoneyFormat;
-use Validator;
+use Illuminate\Support\Facades\Log;
 
 class PageController extends Controller
 {
@@ -40,7 +40,7 @@ class PageController extends Controller
         //Validate the data
         $this->validate($request, [
             'bill' => ['required', new MoneyFormat],
-            'split' =>'integer|min:1|max:100|required',
+            'split' => 'integer|min:1|max:100|required',
         ]);
 
         //If the validation fails, the user automatically sent back to '/'
