@@ -142,6 +142,8 @@ footer {
 }
 ```
 
+Used Bootstrap and Font Awesome for some CSS modifications.
+
 **Code References - Project 2 Code integrated to Project 3**
 
 Opacity Code for Parent Div: <https://stackoverflow.com/questions/3969380/achieving-white-opacity-effect-in-html-css>
