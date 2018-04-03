@@ -125,8 +125,6 @@ $request->session()->put('roundUp', $request->roundUp);
 
 Also received help from Professor Susan Buck.
 
-**Code References - Project 2 Code integrated to Project 3**
-
 CSS Code for Footer from Foobooks from Lecture: <https://github.com/susanBuck/foobooks/blob/392eff49ba15086fb4de12280814d4c20b48a478/public/css/foobooks.css>
 
 ```
@@ -143,6 +141,8 @@ footer {
     background-color: rgba(255, 255, 255, 0.5);
 }
 ```
+
+**Code References - Project 2 Code integrated to Project 3**
 
 Opacity Code for Parent Div: <https://stackoverflow.com/questions/3969380/achieving-white-opacity-effect-in-html-css>
 
