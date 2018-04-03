@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * MoneyForm.php
+ * MoneyForm.php validates if the bill input is a valid form
+ * of USD currency.
+ * Code integrated from Project 2 to Project 3
+ * Created by: Marc-Eli Faldas
+ * Last Modified: 4/2/2017
+ */
+
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;

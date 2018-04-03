@@ -1,15 +1,24 @@
 <?php
 
+/**
+ * PageController.php
+ * Shows and Process the form.
+ * Uses logic code integrated from Project 2 to Project 3.
+ * Created By: Marc-Eli Faldas
+ * Last Modified: 4/2/2018
+ */
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Rules\MoneyFormat;
-use Illuminate\Support\Facades\Log;
 
 class PageController extends Controller
 {
     /*
-     * Showing Form
+     * Shows Form
+     * @param $request: The request from the view
+     * @return view('pages.index'): The view with input and errors/results
      */
     public function index(Request $request)
     {
@@ -27,17 +36,21 @@ class PageController extends Controller
             'bill' => $bill,
             'tip' => $tip,
             'roundUp' => $roundUp
-
         ]);
     }
 
     /*
-     * Processing Form
+     * Process Form
+     * Also puts data into the session so if the user were
+     * to do a reload of the page, they can see the input they made.
+     * @param $request: The request from the view
+     * @return redirect('/'): The view with accompanying errors/results
      */
-
     public function calculation(Request $request)
     {
-
+        //If there are validation error, puts the current results into
+        //the session prior to validation so the user can see their input
+        //as well as reload the page.
         $request->session()->put('bill', $request->bill);
         $request->session()->put('split', $request->split);
         $request->session()->put('tip', $request->tip);
@@ -49,7 +62,12 @@ class PageController extends Controller
             'split' => 'integer|min:1|max:100|required',
         ]);
 
-        //If the validation fails, the user automatically sent back to '/'
+        //If the validation fails, the user is automatically sent back to '/'
+        //User can see all data since using old method.
+
+        //Note:  If user puts in valid data and reloads the page, they can see
+        //       it still because of putting the data into the session
+        //       immediately.
 
         //Run the Calculation
         $splitter = new SplitterController(
@@ -77,16 +95,10 @@ class PageController extends Controller
 
         $results = $splitter->resultMaker($splitBetween);
 
-        $request->session()->put('bill', $request->bill);
-        $request->session()->put('split', $request->split);
-        $request->session()->put('tip', $request->tip);
-        $request->session()->put('roundUp', $request->roundUp);
-
-        // redirect back to the page and include the results
+        // Redirect back to the page and include the results
         return redirect('/')->with([
             'results' => $results,
             'calcError' => $calcError,
         ]);
     }
-
 }

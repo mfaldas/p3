@@ -113,21 +113,21 @@ class SplitterController extends Controller
     public function resultMaker($a)
     {
         if (floatVal($a[1]) == floatVal($a[3])) {
-            return "Everyone owes $" . $a[1] . ".";
+            return 'Everyone owes $' . $a[1] . '.';
         } else if (floatVal($a[0]) == 1 && floatVal($a[2]) == 0) {
-            return "1 person owes $" . $a[1] . ".";
+            return '1 person owes $' . $a[1] . '.';
         } else if (floatVal($a[0]) > 1 && floatVal($a[2]) == 0) {
-            return "Everyone owes $" . $a[1] . ".";
+            return 'Everyone owes $' . $a[1] . '.';
         } else if (floatVal($a[0]) > 1 && floatVal($a[2]) == 0) {
-            return "Everyone owes $" . $a[1] . ".";
+            return 'Everyone owes $' . $a[1] . '.';
         } else if (floatVal($a[0]) == 1 && floatVal($a[2]) == 1) {
-            return $a[0] . " person owes $" . $a[1] . " and " . $a[2] . " person owes $" . $a[3] . ".";
+            return $a[0] . ' person owes $' . $a[1] . ' and ' . $a[2] . ' person owes $' . $a[3] . '.';
         } else if (floatVal($a[0]) > 1 && floatVal($a[2]) == 1) {
-            return $a[0] . " people owe $" . $a[1] . " and " . $a[2] . " person owes $" . $a[3] . ".";
+            return $a[0] . ' people owe $' . $a[1] . ' and ' . $a[2] . ' person owes $' . $a[3] . '.';
         } else if (floatVal($a[0]) == 1 && floatVal($a[2]) > 1) {
-            return $a[0] . " person owes $" . $a[1] . " and " . $a[2] . " people $" . $a[3] . ".";
+            return $a[0] . ' person owes $' . $a[1] . ' and ' . $a[2] . ' people $' . $a[3] . '.';
         } else {
-            return $a[0] . " people owe $" . $a[1] . " and " . $a[2] . " people owe $" . $a[3] . ".";
+            return $a[0] . ' people owe $' . $a[1] . ' and ' . $a[2] . ' people owe $' . $a[3] . '.';
         }
     }
 }
